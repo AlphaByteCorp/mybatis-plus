@@ -55,4 +55,8 @@ public interface TenantLineHandler {
     default boolean ignoreTable(String tableName) {
         return false;
     }
+
+    default boolean doSubjectFilter() {
+        return false;
+    }
 }

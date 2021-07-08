@@ -106,7 +106,7 @@ public class TenantLineInnerInterceptor extends JsqlParserSupport implements Inn
 
     @Override
     protected void processInsert(Insert insert, int index, String sql, Object obj) {
-        if (tenantLineHandler.ignoreTable(insert.getTable().getName())) {
+        if (tenantLineHandler.ignoreTable(insert.getTable().getName()) || tenantLineHandler.doSubjectFilter()) {
             // 过滤退出执行
             return;
         }
@@ -153,7 +153,7 @@ public class TenantLineInnerInterceptor extends JsqlParserSupport implements Inn
     @Override
     protected void processUpdate(Update update, int index, String sql, Object obj) {
         final Table table = update.getTable();
-        if (tenantLineHandler.ignoreTable(table.getName())) {
+        if (tenantLineHandler.ignoreTable(table.getName())  || tenantLineHandler.doSubjectFilter()) {
             // 过滤退出执行
             return;
         }
@@ -165,7 +165,7 @@ public class TenantLineInnerInterceptor extends JsqlParserSupport implements Inn
      */
     @Override
     protected void processDelete(Delete delete, int index, String sql, Object obj) {
-        if (tenantLineHandler.ignoreTable(delete.getTable().getName())) {
+        if (tenantLineHandler.ignoreTable(delete.getTable().getName())  || tenantLineHandler.doSubjectFilter()) {
             // 过滤退出执行
             return;
         }
